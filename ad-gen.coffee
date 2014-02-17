@@ -58,18 +58,19 @@ pageLevelCodePart1 = "
     gads.type = \"text/javascript\";
     var useSSL = \"https:\" == document.location.protocol;
     gads.src = (useSSL ? \"https:\" : \"http:\") + \"//www.googletagservices.com/tag/js/gpt.js\";
-    var node =document.getElementsByTagName(\"script\")[0];
+    var node = document.getElementsByTagName(\"script\")[0];
     node.parentNode.insertBefore(gads, node);
   })();
 "
 
 pageLevelCodePart2 = "
   googletag.cmd.push(function() {
-  googletag.pubads().enableSingleRequest();
-  googletag.enableServices();
+    googletag.pubads().enableAsyncRendering();
+    googletag.enableServices();
   });
 "
 
+# Beware: custom targeting has a max length and beyond that GPT ignores it
 buildSlotDeclaration = ->
   adUnitName = slot.getAttribute "data-ad-unit"
   "googletag.cmd.push(function() {
