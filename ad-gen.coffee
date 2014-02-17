@@ -1,3 +1,7 @@
+###
+Source: https://github.com/kelvin-chappell/ad-code-gen
+###
+
 # Generates DFP ad code.
 #
 # Slot parameters:
