@@ -1,5 +1,5 @@
 ###
-Source: https://github.com/kelvin-chappell/ad-code-gen
+Source: https://github.com/kelvin-chappell/ad-code-gen/blob/master/ad-gen.coffee
 ###
 
 # Generates DFP ad code.
@@ -90,7 +90,7 @@ insertScript = (content) ->
   script = document.createElement "script"
   slot.parentElement.appendChild script
   script.type = "text/javascript"
-  script.innerHTML = content
+  script.text = content
 
 insertAdConfig = ->
   isFirstAd = scripts.length == 1
