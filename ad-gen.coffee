@@ -69,9 +69,7 @@ pageLevelCodePart1 = "
 
 pageLevelCodePart2 = "
   googletag.cmd.push(function() {
-    googletag.pubads()#{buildAllThirdPartySegments()};
     googletag.pubads().enableAsyncRendering();
-    googletag.pubads().enableSingleRequest();
     googletag.enableServices();
   });
 "
@@ -80,7 +78,7 @@ pageLevelCodePart2 = "
 buildSlotDeclaration = ->
   adUnitName = slot.getAttribute "data-ad-unit"
   "googletag.cmd.push(function() {
-    googletag.defineSlot('/#{networkId}/#{adUnitName}', #{buildTargetSize()}, '#{slotName}')#{buildCustomTargeting()}.addService(googletag.pubads());
+    googletag.defineSlot('/#{networkId}/#{adUnitName}', #{buildTargetSize()}, '#{slotName}')#{buildCustomTargeting()}#{buildAllThirdPartySegments()}.addService(googletag.pubads());
   });"
 
 buildSlotCode = ->
