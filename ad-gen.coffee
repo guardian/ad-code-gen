@@ -5,7 +5,6 @@ Source: https://github.com/kelvin-chappell/ad-code-gen/blob/master/ad-gen.coffee
 # Generates DFP ad code.
 #
 # Slot parameters:
-#   data-ad-slot-name:      Identifies slot being filled [required]
 #   data-ad-unit:           Targeted DFP ad unit name [required]
 #   data-ad-size:           Targeted creative size(s), eg. "100x200" or "100x200,200x300" [required]
 #   data-ad-target-<name>:  Custom targeting, eg. data-ad-target-s="culture", data-ad-target-k="music,culture" [optional]
@@ -16,7 +15,7 @@ networkId = "158186692"
 
 scripts = document.querySelectorAll("script[src$='#{scriptName}']")
 slot = scripts[scripts.length - 1]
-slotName = slot.getAttribute "data-ad-slot-name"
+slotName = "ad-slot-#{scripts.length}"
 
 buildTargetSize = ->
   size = slot.getAttribute "data-ad-size"
