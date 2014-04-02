@@ -11,7 +11,7 @@ Source: https://github.com/kelvin-chappell/ad-code-gen/blob/master/ad-gen.coffee
 
 scriptName = "ad-gen.js"
 
-networkId = "158186692"
+networkId = "59666047"
 
 scripts = document.querySelectorAll("script[src$='#{scriptName}']")
 slot = scripts[scripts.length - 1]
