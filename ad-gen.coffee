@@ -1,5 +1,5 @@
 ###
-Source: https://github.com/kelvin-chappell/ad-code-gen/blob/master/ad-gen.coffee
+Source: https://github.com/guardian/ad-code-gen/blob/master/ad-gen.coffee
 ###
 
 # Generates DFP ad code.
@@ -69,6 +69,7 @@ pageLevelCodePart1 = "
 pageLevelCodePart2 = "
   googletag.cmd.push(function() {
     googletag.pubads().enableAsyncRendering();
+    googletag.pubads().collapseEmptyDivs();
     googletag.enableServices();
   });
 "
