@@ -43,7 +43,8 @@ buildAllThirdPartySegments = ->
 buildThirdPartySegments = (segments) ->
   buildSegmentValues = ->
     values = ""
-    for segment in segments.split "&" when segment.length > 0
+    segmentArr = (segments.split "&")[...40]
+    for segment in segmentArr when segment.length > 0
       kv = segment.split "="
       value = kv[1]
       values += "'#{value}',"
