@@ -8,6 +8,9 @@ Examples of use are:
 * [Page with Single Ad Slot](https://gist.github.com/kelvin-chappell/ab045b1c13c6032c2776)
 * [Page with Multiple Ad Slots](https://gist.github.com/kelvin-chappell/d42a83f49e927cf1945d)
 
+## To Install Coffeescript
+sudo npm install -g coffee-script
+
 ## To Generate JS
 coffee -c ad-gen.coffee
 
