@@ -5,8 +5,10 @@ DFP Third Party Ad Code Generator
 The code-generating script is [ad-gen.coffee](ad-gen.coffee)
 
 Examples of use are:
-* [Page with Single Ad Slot](https://gist.github.com/kelvin-chappell/ab045b1c13c6032c2776)
-* [Page with Multiple Ad Slots](https://gist.github.com/kelvin-chappell/d42a83f49e927cf1945d)
+
+* [Page With Single Ad Slot](https://gist.github.com/kelvin-chappell/ab045b1c13c6032c2776)
+* [Page With Multiple Ad Slots](https://gist.github.com/kelvin-chappell/d42a83f49e927cf1945d)
+* [Page With Out-of-page Ad Slot](https://gist.github.com/kelvin-chappell/7783fcc36ac9886fbf99)
 
 ## To Install Coffeescript
 sudo npm install -g coffee-script

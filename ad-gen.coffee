@@ -6,7 +6,8 @@ Source: https://github.com/guardian/ad-code-gen/blob/master/ad-gen.coffee
 #
 # Slot parameters:
 #   data-ad-unit:           Targeted DFP ad unit name [required]
-#   data-ad-size:           Targeted creative size(s), eg. "100x200" or "100x200,200x300" [required]
+#   data-ad-size:           Targeted creative size(s), eg. "100x200" or "100x200,200x300" [required for in-page ads]
+#                           - if missing, an out-of-page ad will be built
 #   data-ad-target-<name>:  Custom targeting, eg. data-ad-target-s="culture", data-ad-target-k="music,culture" [optional]
 
 scriptName = "ad-gen.js"
@@ -17,8 +18,7 @@ scripts = document.querySelectorAll("script[src$='#{scriptName}']")
 slot = scripts[scripts.length - 1]
 slotName = "ad-slot-#{scripts.length}"
 
-buildTargetSize = ->
-  size = slot.getAttribute "data-ad-size"
+buildTargetSize = (size) ->
   formatted = size.replace(/\s*,\s*/g, "],[").replace(/\s*x\s*/g, ",")
   "[[#{formatted}]]"
 
@@ -74,12 +74,18 @@ pageLevelCodePart2 = "
   });
 "
 
-# Beware: custom targeting has a max length and beyond that GPT ignores it
-buildSlotDeclaration = ->
+# Beware: GPT ad request has a max length and beyond that any custom targeting is ignored
+buildSlotDeclaration = (size) ->
   adUnitName = slot.getAttribute "data-ad-unit"
   "googletag.cmd.push(function() {
-    googletag.defineSlot('/#{networkId}/#{adUnitName}', #{buildTargetSize()}, '#{slotName}')#{buildCustomTargeting()}#{buildAllThirdPartySegments()}.addService(googletag.pubads());
-  });"
+      googletag.defineSlot('/#{networkId}/#{adUnitName}', #{buildTargetSize(size)}, '#{slotName}')#{buildCustomTargeting()}#{buildAllThirdPartySegments()}.addService(googletag.pubads());
+    });"
+
+buildOutOfPageSlotDeclaration = ->
+  adUnitName = slot.getAttribute "data-ad-unit"
+  "googletag.cmd.push(function() {
+      googletag.defineOutOfPageSlot('/#{networkId}/#{adUnitName}', '#{slotName}')#{buildCustomTargeting()}#{buildAllThirdPartySegments()}.addService(googletag.pubads());
+    });"
 
 buildSlotCode = ->
   "googletag.cmd.push(function() {
@@ -97,7 +103,11 @@ insertAdConfig = ->
   if isFirstAd
     insertScript pageLevelCodePart1
     insertScript pageLevelCodePart2
-  insertScript buildSlotDeclaration()
+  size = slot.getAttribute "data-ad-size"
+  if size?
+    insertScript buildSlotDeclaration(size)
+  else
+    insertScript buildOutOfPageSlotDeclaration()
 
 insertAd = ->
   slotDiv = document.createElement "div"
