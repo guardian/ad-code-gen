@@ -7,7 +7,7 @@ Source: https://github.com/guardian/ad-code-gen/blob/master/ad-gen.coffee
 # Slot parameters:
 #   data-ad-unit:           Targeted DFP ad unit name [required]
 #   data-ad-size:           Targeted creative size(s), eg. "100x200" or "100x200,200x300" [required for in-page ads]
-#                           - if missing, an out-of-page ad will be built
+#                           - if "0x0", an out-of-page ad will be built
 #   data-ad-target-<name>:  Custom targeting, eg. data-ad-target-s="culture", data-ad-target-k="music,culture" [optional]
 
 scriptName = "ad-gen.js"
@@ -104,10 +104,10 @@ insertAdConfig = ->
     insertScript pageLevelCodePart1
     insertScript pageLevelCodePart2
   size = slot.getAttribute "data-ad-size"
-  if size?
-    insertScript buildSlotDeclaration(size)
-  else
+  if size == "0x0"
     insertScript buildOutOfPageSlotDeclaration()
+  else
+    insertScript buildSlotDeclaration(size)
 
 insertAd = ->
   slotDiv = document.createElement "div"
