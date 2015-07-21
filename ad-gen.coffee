@@ -34,10 +34,14 @@ buildCustomTargeting = ->
 
 buildAllThirdPartySegments = ->
   targeting = ""
-  if gsegQS? and gsegQS.length > 1
-    targeting += buildThirdPartySegments(gsegQS)
-  if quantSegs? and quantSegs.length > 1
-    targeting += buildThirdPartySegments(quantSegs)
+
+  kruxSegments = window.localStorage.kxsegs ? []
+  if kruxSegments.length > 0
+    filling = kruxSegments.split(',').join("','")
+    output = "['#{filling}']"
+
+    targeting += ".setTargeting('x', #{output})"
+
   targeting
 
 buildThirdPartySegments = (segments) ->
