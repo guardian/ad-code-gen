@@ -35,8 +35,8 @@ buildCustomTargeting = ->
 buildAllThirdPartySegments = ->
   targeting = ""
 
-  kruxSegments = window.localStorage.kxsegs ? []
-  if kruxSegments.length > 0
+  kruxSegments = window.localStorage.kxsegs ? ""
+  if kruxSegments != ""
     filling = kruxSegments.split(',').join("','")
     output = "['#{filling}']"
 
