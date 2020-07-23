@@ -71,10 +71,24 @@ pageLevelCodePart1 = "
 "
 
 pageLevelCodePart2 = "
+  function enforceGTPCCPA(gtp){
+    if(! window.__uspapi ){ return; }
+    window.__uspapi('getUSPData', 2,
+      function( data, success ){
+        if( !success ){ return; }
+        if( data.uspString.charAt(2) === 'Y' ){
+          gtp.pubads().setPrivacySettings({
+            'restrictDataProcessing': true
+          });
+        }
+    });
+  }
+
   googletag.cmd.push(function() {
     googletag.pubads().enableAsyncRendering();
     googletag.pubads().collapseEmptyDivs();
     googletag.enableServices();
+    enforceGTPCCPA(googletag);
   });
 "
 
