@@ -23,7 +23,11 @@ coffee -c ad-gen.coffee
 
 ## To Deploy
 0. [Generate JS](#to-generate-js)
-0. Upload ad-gen.js to aws-frontend-store/PROD/commercial
+0. Upload ad-gen.js to aws-frontend-store/PROD/commercial with:
+   Encryption: AES-256 (Amazon S3 server-side encryption, aka Amazon S3 master-key)
+   Permission: Public Read,
+   Storage Class: Standard,
+   Metadata: Content-Type application/x-javascript
 0. Make script public
 
 ## TODO
