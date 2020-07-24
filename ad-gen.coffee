@@ -72,14 +72,19 @@ pageLevelCodePart1 = "
 
 pageLevelCodePart2 = "
   function enforceGTPCCPA(gtp){
+    gtp.pubads().setTargeting('rdp', 'na');
     if(! window.__uspapi ){ return; }
     window.__uspapi('getUSPData', 2,
       function( data, success ){
         if( !success ){ return; }
-        if( data.uspString.charAt(2) === 'Y' ){
+        var rdpChar = data.uspString.charAt(2);
+        if( 'Y' === rdpChar ){
+          gtp.pubads().setTargeting('rdp', 't');
           gtp.pubads().setPrivacySettings({
             'restrictDataProcessing': true
           });
+        }else if( 'N' === rdpChar ){
+          gtp.pubads().setTargeting('rdp', 'f');
         }
     });
   }
